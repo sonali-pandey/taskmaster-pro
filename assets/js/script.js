@@ -20,6 +20,7 @@ var createTask = function(taskText, taskDate, taskList) {
   $("#list-" + taskList).append(taskLi);
 };
 
+
 var loadTasks = function() {
   tasks = JSON.parse(localStorage.getItem("tasks"));
 
@@ -43,6 +44,7 @@ var loadTasks = function() {
   });
 };
 
+// save tasks in local storage
 var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
@@ -50,10 +52,14 @@ var saveTasks = function() {
 //event delegate <p> click
 
 $(".list-group").on("click","p",function(){
-  var text = $(this).text();
+  var text = $(this)
+    .text()
+    .trim();
+  
   var textInput = $("<textarea>")
     .addClass("form-control")
     .val(text);
+
   $(this).replaceWith(textInput);
   textInput.trigger("focus");
 });
